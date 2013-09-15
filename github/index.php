@@ -1,7 +1,3 @@
 <?php
   header('Location: https://github.com/Nearalias');
 ?>
-<html>
-  <body>
-  </body>
-</html>
