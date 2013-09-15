@@ -1,0 +1,5 @@
+Options +FollowSymlinks -MultiViews
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^nearalias\.com  [NC]
+RewriteRule ^github/(.*)  https://github.com/Nearalias/$1 [R=301,NC,L]
