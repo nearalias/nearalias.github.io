@@ -49,7 +49,6 @@ def fetch_price(listing_url):
 
 
 def send_discord_alert(items):
-    user_id = "238521085258235904"
     fields = []
     for item in items:
         fields.append(
@@ -64,7 +63,7 @@ def send_discord_alert(items):
         "embeds": [
             {
                 "title": "📉 Mercari Price Check",
-                "description": f"@{user_id} The following items have dropped below your desired threshold:",
+                "description": f"<@{MANBU_USER_ID}> The following items have dropped below your desired threshold:",
                 "color": 0x00FF00,
                 "fields": fields,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
