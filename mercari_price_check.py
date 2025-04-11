@@ -1,80 +1,18 @@
-import requests
+import json
 import os
-from playwright.sync_api import sync_playwright
+import requests
 from datetime import datetime, timezone
+from playwright.sync_api import sync_playwright
 
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
-MANBU_USER_ID = os.getenv("MANBU_USER_ID")
-
-LISTINGS = [
-    {
-        "name": "Dark Magician of Chaos",
-        "code": "IOC-AE065",
-        "condition": "ARS 10+",
-        "threshold": 222222,
-        "url": "https://jp.mercari.com/item/m20120586668",
-        "user_ids": [MANBU_USER_ID],
-    },
-    {
-        "name": "The Legendary Exodia Incarnate",
-        "code": "INFO-AE121",
-        "condition": "Raw",
-        "threshold": 44000,
-        "url": "https://jp.mercari.com/item/m50786306316",
-        "user_ids": [MANBU_USER_ID],
-    },
-    {
-        "name": "Dark Paladin AE",
-        "code": "MFC-105",
-        "condition": "ARS 10",
-        "threshold": 57000,
-        "url": "https://jp.mercari.com/item/m55582292120",
-        "user_ids": [MANBU_USER_ID],
-    },
-    {
-        "name": "Yata-Garasu AE",
-        "code": "LOD-000",
-        "condition": "ARS 10",
-        "threshold": 72222,
-        "url": "https://jp.mercari.com/item/m89064529226",
-        "user_ids": [MANBU_USER_ID],
-    },
-    {
-        "name": "Black Luster Soldier - Envoy of the Beginning",
-        "code": "IOC-AE025",
-        "condition": "ARS 10",
-        "threshold": 222222,
-        "url": "https://jp.mercari.com/item/m51195221403",
-        "user_ids": [MANBU_USER_ID],
-    },
-    {
-        "name": "Chaos Emperor Dragon - Envoy of the End",
-        "code": "IOC-AE000",
-        "condition": "PSA 10",
-        "threshold": 9144444,
-        "url": "https://jp.mercari.com/item/m12171828346",
-        "user_ids": [MANBU_USER_ID, "1000000000000000000"],
-    },
-    {
-        "name": "Stardust Dragon",
-        "code": "YCSC",
-        "condition": "PSA 10",
-        "threshold": 288888,
-        "url": "https://jp.mercari.com/item/m85237536985",
-        "user_ids": [MANBU_USER_ID],
-    },
-    {
-        "name": "Injection Fairy Lily",
-        "code": "24CC-AE001",
-        "condition": "PSA 10",
-        "threshold": 72222,
-        "url": "https://jp.mercari.com/item/m26357508234",
-        "user_ids": [MANBU_USER_ID],
-    },
-]
 
 
-def fetch_price(listing_url):
+def load_listings():
+    with open("listings.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def fetch_price_from_mercari(listing_url):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)  # headless: True to run without GUI
         page = browser.new_page()
@@ -85,17 +23,30 @@ def fetch_price(listing_url):
 
         # Get the price text from the page
         price_element = page.query_selector('[data-testid="price"]')
-        
+
         if price_element:
             # Extract the price part
-            price = price_element.query_selector('span:nth-child(2)').inner_text().strip().replace(",", "")
+            price = (
+                price_element.query_selector("span:nth-child(2)")
+                .inner_text()
+                .strip()
+                .replace(",", "")
+            )
             browser.close()
-            
+
             # Combine and return the price as an integer
             return int(price)
         else:
             browser.close()
             return None
+
+
+def fetch_price(listing_url, website):
+    match website:
+        case "MERCARI":
+            return fetch_price_from_mercari(listing_url)
+        case _:
+            raise ValueError(f"Unsupported website: {website}")
 
 
 def send_discord_alert(items):
@@ -106,7 +57,7 @@ def send_discord_alert(items):
         price = item["price"]
         users_to_notify.extend(info["user_ids"])
         description_lines.append(
-            f"• **{info['name']} - {info['code']} - {info['condition']}**\n"
+            f"• **{info['name']} - ({info['code']}) - {info['condition']}**\n"
             f"  Price: **¥{price:,}** (Threshold: ¥{info['threshold']:,}) - [Link]({info['url']})"
         )
 
@@ -116,11 +67,12 @@ def send_discord_alert(items):
     payload = {
         "embeds": [
             {
-                "title": "📉 Mercari Price Check",
-                "description": f"{users} The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
+                "title": "Price Check Alert",
+                "description": f"{users} The following items have dropped below thresholds:\n\n"
+                + "\n\n".join(description_lines),
                 "color": 0x7FFFD4,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
-                # "footer": {"text": "Mercari Price Tracker"},
+                # "footer": {"text": "Price Tracker"},
             }
         ]
     }
@@ -131,11 +83,12 @@ def send_discord_alert(items):
 
 
 def main():
+    listings = load_listings()
     dropped_items = []
 
-    for listing in LISTINGS:
+    for listing in listings:
         try:
-            current_price = fetch_price(listing["url"])
+            current_price = fetch_price(listing["url"], listing["website"])
             if current_price <= listing["threshold"]:
                 dropped_items.append({"info": listing, "price": current_price})
         except Exception as e:
