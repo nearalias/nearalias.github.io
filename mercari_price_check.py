@@ -51,9 +51,9 @@ LISTINGS = [
         "name": "Chaos Emperor Dragon - Envoy of the End",
         "code": "IOC-AE000",
         "condition": "PSA 10",
-        "threshold": 144444,
+        "threshold": 9144444,
         "url": "https://jp.mercari.com/item/m12171828346",
-        "user_ids": [MANBU_USER_ID],
+        "user_ids": [MANBU_USER_ID, "1000000000000000000"],
     },
     {
         "name": "Stardust Dragon",
