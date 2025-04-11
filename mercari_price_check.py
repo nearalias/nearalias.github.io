@@ -61,8 +61,7 @@ def send_discord_alert(items):
             f"  Price: **¥{price:,}** (Threshold: ¥{info['threshold']:,}) - [Link]({info['url']})"
         )
 
-    users_to_notify = list(set(users_to_notify))
-    users = ", ".join([f"<@{user_id}>" for user_id in users_to_notify])
+    users = ", ".join(f"<@{user_id}>" for user_id in sorted(set(users_to_notify)))
 
     payload = {
         "content": f"{users} Listing prices have dropped below thresholds!",
