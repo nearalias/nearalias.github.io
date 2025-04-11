@@ -65,11 +65,11 @@ def send_discord_alert(items):
     users = ", ".join([f"<@{user_id}>" for user_id in users_to_notify])
 
     payload = {
-        "content": f"{users} The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
+        "content": f"{users} Listing prices have dropped below thresholds!",
         "embeds": [
             {
                 # "title": "Price Check Alert",
-                "description": f"{users} The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
+                "description": "\n\n".join(description_lines),
                 "color": 0x7FFFD4,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 # "footer": {"text": "Price Tracker"},
