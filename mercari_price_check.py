@@ -67,8 +67,8 @@ def send_discord_alert(items):
     payload = {
         "embeds": [
             {
-                "title": "Price Check Alert",
-                "content": f"{users}",
+                # "title": "Price Check Alert",
+                "content": f"{users} where is this??",
                 "description": "The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
                 "color": 0x7FFFD4,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
