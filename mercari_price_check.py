@@ -64,7 +64,7 @@ def send_discord_alert(items):
     users = ", ".join(f"<@{user_id}>" for user_id in sorted(set(users_to_notify)))
 
     payload = {
-        "content": f"{users} Listing prices have dropped below thresholds!",
+        "content": f"\n\nListing prices have dropped below thresholds! {users}",
         "embeds": [
             {
                 # "title": "Price Check Alert",
