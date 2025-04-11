@@ -99,23 +99,25 @@ def fetch_price(listing_url):
 
 
 def send_discord_alert(items):
-    user_ids_to_notify = []
+    users_to_notify = []
     description_lines = []
     for item in items:
-        user_ids_to_notify.extend(item["user_ids"])
+        info = item["info"]
+        price = item["price"]
+        users_to_notify.extend(info["user_ids"])
         description_lines.append(
-            f"• **{item['name']} - {item['code']} - {item['condition']}**\n"
-            f"  Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) - [Link]({item['url']})"
+            f"• **{info['name']} - {info['code']} - {info['condition']}**\n"
+            f"  Price: **¥{price:,}** (Threshold: ¥{info['threshold']:,}) - [Link]({info['url']})"
         )
 
-    user_ids_to_notify = list(set(user_ids_to_notify))
-    user_ids = ", ".join([f"<@{user_id}>" for user_id in user_ids_to_notify])
+    users_to_notify = list(set(users_to_notify))
+    users = ", ".join([f"<@{user_id}>" for user_id in users_to_notify])
 
     payload = {
         "embeds": [
             {
                 "title": "📉 Mercari Price Check",
-                "description": f"{user_ids} The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
+                "description": f"{users} The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
                 "color": 0x7FFFD4,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 # "footer": {"text": "Mercari Price Tracker"},
@@ -123,9 +125,9 @@ def send_discord_alert(items):
         ]
     }
 
-    res = requests.post(DISCORD_WEBHOOK_URL, json=payload)
-    if res.status_code not in (200, 204):
-        print(f"Failed to send Discord message: {res.text}")
+    response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
+    if response.status_code not in (200, 204):
+        print(f"Failed to send Discord message: {response.text}")
 
 
 def main():
@@ -135,16 +137,7 @@ def main():
         try:
             current_price = fetch_price(listing["url"])
             if current_price <= listing["threshold"]:
-                dropped_items.append(
-                    {
-                        "name": listing["name"],
-                        "code": listing["code"],
-                        "condition": listing["condition"],
-                        "url": listing["url"],
-                        "price": current_price,
-                        "threshold": listing["threshold"],
-                    }
-                )
+                dropped_items.append({"info": listing, "price": current_price})
         except Exception as e:
             print(f"Error fetching price for {listing['name']}: {e}")
 
