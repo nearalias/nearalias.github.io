@@ -94,7 +94,7 @@ def send_discord_alert(items):
     fields = []
     for item in items:
         name = f"{item['name']} - ({item['code']}) - {item['condition']}\u200b"
-        value = f"Current Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) [View Listing]({item['url']})\u200b"
+        value = f"Current Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) [View  ]({item['url']})\u200b"
 
         fields.append(
             {
