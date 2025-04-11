@@ -10,7 +10,7 @@ LISTINGS = [
         "name": "Dark Magician of Chaos",
         "code": "IOC-AE065",
         "condition": "ARS 10+",
-        "threshold": 215000,
+        "threshold": 515000,
         "url": "https://jp.mercari.com/item/m20120586668",
     },
     {
