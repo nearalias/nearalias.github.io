@@ -71,23 +71,6 @@ LISTINGS = [
         "url": "https://jp.mercari.com/item/m26357508234",
         "user_ids": [MANBU_USER_ID],
     },
-
-    {
-        "name": "Stardust Dragon",
-        "code": "TDGS-AE040",
-        "condition": "PSA 10",
-        "threshold": 8288888,
-        "url": "https://jp.mercari.com/item/m85237536985",
-        "user_ids": [MANBU_USER_ID],
-    },
-    {
-        "name": "Black Rose Dragon",
-        "code": "CSOC-AE039",
-        "condition": "PSA 10",
-        "threshold": 8872222,
-        "url": "https://jp.mercari.com/item/m26357508234",
-        "user_ids": [MANBU_USER_ID],
-    },
 ]
 
 
