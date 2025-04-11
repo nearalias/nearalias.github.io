@@ -10,14 +10,14 @@ LISTINGS = [
         "name": "Dark Magician of Chaos",
         "code": "IOC-AE065",
         "condition": "ARS 10+",
-        "threshold": 515000,
+        "threshold": 220000,
         "url": "https://jp.mercari.com/item/m20120586668",
     },
     {
         "name": "The Legendary Exodia Incarnate",
         "code": "INFO-AE121",
         "condition": "Raw",
-        "threshold": 43000,
+        "threshold": 44000,
         "url": "https://jp.mercari.com/item/m50786306316",
     },
 ]
