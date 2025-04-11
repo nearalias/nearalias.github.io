@@ -91,26 +91,34 @@ def fetch_price(listing_url):
 
 
 def send_discord_alert(items):
-    fields = []
+    description_lines = []
     for item in items:
-        name = f"{item['name']} - {item['code']} - {item['condition']}\u200b"
-        value = f"Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) [Link]({item['url']})\u200b"
-
-        fields.append(
-            {
-                "name": name,
-                "value": value,
-                "inline": False,
-            }
+        description_lines.append(
+            f"• **{item['name']} {item['code']} - {item['condition']}**\n"
+            f"  Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) - [Link]({item['url']})"
         )
+
+    # fields = []
+    # for item in items:
+    #     name = f"{item['name']} - {item['code']} - {item['condition']}\u200b"
+    #     value = f"Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) [Link]({item['url']})\u200b"
+
+    #     fields.append(
+    #         {
+    #             "name": name,
+    #             "value": value,
+    #             "inline": False,
+    #         }
+    #     )
 
     payload = {
         "embeds": [
             {
                 "title": "📉 Mercari Price Check",
-                "description": f"<@{MANBU_USER_ID}> The following items have dropped below thresholds:",
+                # "description": f"<@{MANBU_USER_ID}> The following items have dropped below thresholds:",
+                "description": f"<@{MANBU_USER_ID}> The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
                 "color": 0x7FFFD4,
-                "fields": fields,
+                # "fields": fields,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 # "footer": {"text": "Mercari Price Tracker"},
             }
