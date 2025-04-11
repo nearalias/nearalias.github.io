@@ -68,8 +68,8 @@ def send_discord_alert(items):
         "embeds": [
             {
                 "title": "Price Check Alert",
-                "description": f"{users} The following items have dropped below thresholds:\n\n"
-                + "\n\n".join(description_lines),
+                "content": f"{users}",
+                "description": "The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
                 "color": 0x7FFFD4,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 # "footer": {"text": "Price Tracker"},
