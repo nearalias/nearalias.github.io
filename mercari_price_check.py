@@ -11,14 +11,14 @@ LISTINGS = [
         "name": "Dark Magician of Chaos",
         "code": "IOC-AE065",
         "condition": "ARS 10+",
-        "threshold": 4222222,
+        "threshold": 222222,
         "url": "https://jp.mercari.com/item/m20120586668",
     },
     {
         "name": "The Legendary Exodia Incarnate",
         "code": "INFO-AE121",
         "condition": "Raw",
-        "threshold": 444000,
+        "threshold": 44000,
         "url": "https://jp.mercari.com/item/m50786306316",
     },
     {
@@ -61,6 +61,21 @@ LISTINGS = [
         "code": "24CC-AE001",
         "condition": "PSA 10",
         "threshold": 72222,
+        "url": "https://jp.mercari.com/item/m26357508234",
+    },
+
+    {
+        "name": "Stardust Dragon",
+        "code": "TDGS-AE040",
+        "condition": "PSA 10",
+        "threshold": 8288888,
+        "url": "https://jp.mercari.com/item/m85237536985",
+    },
+    {
+        "name": "Black Rose Dragon",
+        "code": "CSOC-AE039",
+        "condition": "PSA 10",
+        "threshold": 8872222,
         "url": "https://jp.mercari.com/item/m26357508234",
     },
 ]
