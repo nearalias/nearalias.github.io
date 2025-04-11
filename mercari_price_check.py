@@ -4,13 +4,14 @@ from playwright.sync_api import sync_playwright
 from datetime import datetime, timezone
 
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
+MANBU_USER_ID = os.getenv("MANBU_USER_ID")
 
 LISTINGS = [
     {
         "name": "Dark Magician of Chaos",
         "code": "IOC-AE065",
         "condition": "ARS 10+",
-        "threshold": 220000,
+        "threshold": 920000,
         "url": "https://jp.mercari.com/item/m20120586668",
     },
     {
@@ -62,7 +63,7 @@ def send_discord_alert(items):
         "embeds": [
             {
                 "title": "📉 Mercari Price Check",
-                "description": "The following items have dropped below your desired threshold:",
+                "description": f"@{MANBU_USER_ID} The following items have dropped below your desired threshold:",
                 "color": 0x00FF00,
                 "fields": fields,
                 "timestamp": datetime.now(timezone.utc).isoformat(),

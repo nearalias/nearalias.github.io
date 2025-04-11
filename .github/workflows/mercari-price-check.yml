@@ -37,5 +37,6 @@ jobs:
       - name: Run price check script
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          MANBU_USER_ID: ${{ secrets.MANBU_USER_ID }}
         run: |
           python mercari_price_check.py
