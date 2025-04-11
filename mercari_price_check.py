@@ -93,8 +93,8 @@ def fetch_price(listing_url):
 def send_discord_alert(items):
     fields = []
     for item in items:
-        name = f"{item['name']} - ({item['code']}) - {item['condition']}\u200b"
-        value = f"Current Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) [View  ]({item['url']})\u200b"
+        name = f"{item['name']} - {item['code']} - {item['condition']}\u200b"
+        value = f"Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) [Link]({item['url']})\u200b"
 
         fields.append(
             {
