@@ -13,6 +13,7 @@ LISTINGS = [
         "condition": "ARS 10+",
         "threshold": 222222,
         "url": "https://jp.mercari.com/item/m20120586668",
+        "user_ids": [MANBU_USER_ID],
     },
     {
         "name": "The Legendary Exodia Incarnate",
@@ -20,6 +21,7 @@ LISTINGS = [
         "condition": "Raw",
         "threshold": 44000,
         "url": "https://jp.mercari.com/item/m50786306316",
+        "user_ids": [MANBU_USER_ID],
     },
     {
         "name": "Dark Paladin AE",
@@ -27,6 +29,7 @@ LISTINGS = [
         "condition": "ARS 10",
         "threshold": 57000,
         "url": "https://jp.mercari.com/item/m55582292120",
+        "user_ids": [MANBU_USER_ID],
     },
     {
         "name": "Yata-Garasu AE",
@@ -34,6 +37,7 @@ LISTINGS = [
         "condition": "ARS 10",
         "threshold": 72222,
         "url": "https://jp.mercari.com/item/m89064529226",
+        "user_ids": [MANBU_USER_ID],
     },
     {
         "name": "Black Luster Soldier - Envoy of the Beginning",
@@ -41,6 +45,7 @@ LISTINGS = [
         "condition": "ARS 10",
         "threshold": 222222,
         "url": "https://jp.mercari.com/item/m51195221403",
+        "user_ids": [MANBU_USER_ID],
     },
     {
         "name": "Chaos Emperor Dragon - Envoy of the End",
@@ -48,6 +53,7 @@ LISTINGS = [
         "condition": "PSA 10",
         "threshold": 144444,
         "url": "https://jp.mercari.com/item/m12171828346",
+        "user_ids": [MANBU_USER_ID],
     },
     {
         "name": "Stardust Dragon",
@@ -55,6 +61,7 @@ LISTINGS = [
         "condition": "PSA 10",
         "threshold": 288888,
         "url": "https://jp.mercari.com/item/m85237536985",
+        "user_ids": [MANBU_USER_ID],
     },
     {
         "name": "Injection Fairy Lily",
@@ -62,6 +69,7 @@ LISTINGS = [
         "condition": "PSA 10",
         "threshold": 72222,
         "url": "https://jp.mercari.com/item/m26357508234",
+        "user_ids": [MANBU_USER_ID],
     },
 
     {
@@ -70,6 +78,7 @@ LISTINGS = [
         "condition": "PSA 10",
         "threshold": 8288888,
         "url": "https://jp.mercari.com/item/m85237536985",
+        "user_ids": [MANBU_USER_ID],
     },
     {
         "name": "Black Rose Dragon",
@@ -77,6 +86,7 @@ LISTINGS = [
         "condition": "PSA 10",
         "threshold": 8872222,
         "url": "https://jp.mercari.com/item/m26357508234",
+        "user_ids": [MANBU_USER_ID],
     },
 ]
 
@@ -106,18 +116,23 @@ def fetch_price(listing_url):
 
 
 def send_discord_alert(items):
+    user_ids_to_notify = []
     description_lines = []
     for item in items:
+        user_ids_to_notify.extend(item["user_ids"])
         description_lines.append(
             f"• **{item['name']} - {item['code']} - {item['condition']}**\n"
             f"  Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,}) - [Link]({item['url']})"
         )
 
+    user_ids_to_notify = list(set(user_ids_to_notify))
+    user_ids = ", ".join([f"<@{user_id}>" for user_id in user_ids_to_notify])
+
     payload = {
         "embeds": [
             {
                 "title": "📉 Mercari Price Check",
-                "description": f"<@{MANBU_USER_ID}> The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
+                "description": f"{user_ids} The following items have dropped below thresholds:\n\n" + "\n\n".join(description_lines),
                 "color": 0x7FFFD4,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 # "footer": {"text": "Mercari Price Tracker"},
