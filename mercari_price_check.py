@@ -92,11 +92,16 @@ def fetch_price(listing_url):
 
 def send_discord_alert(items):
     fields = []
-    for item in items:
+    for idx, item in enumerate(items):
+        name = f"{item['name']} - ({item['code']}) - {item['condition']}"
+        value = f"[View Listing]({item['url']})\nCurrent Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,})"
+        if idx < len(items) - 1:
+            value += "\n"
+
         fields.append(
             {
-                "name": f"{item['name']} - ({item['code']}) - {item['condition']}",
-                "value": f"[View Listing]({item['url']})\n💴 **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,})",
+                "name": name,
+                "value": value,
                 "inline": False,
             }
         )
@@ -105,11 +110,11 @@ def send_discord_alert(items):
         "embeds": [
             {
                 "title": "📉 Mercari Price Check",
-                "description": f"<@{MANBU_USER_ID}> The following items have dropped below your desired threshold:",
-                "color": 0x00FF00,
+                "description": f"<@{MANBU_USER_ID}> The following items have dropped below thresholds:",
+                "color": 0x7FFFD4,
                 "fields": fields,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
-                "footer": {"text": "Mercari Price Tracker"},
+                # "footer": {"text": "Mercari Price Tracker"},
             }
         ]
     }
