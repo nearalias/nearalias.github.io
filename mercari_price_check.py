@@ -94,7 +94,7 @@ def send_discord_alert(items):
     fields = []
     for idx, item in enumerate(items):
         name = f"{item['name']} - ({item['code']}) - {item['condition']}"
-        value = f"[View Listing]({item['url']})\nCurrent Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,})"
+        value = f"[View Listing]({item['url']})\nCurrent Price: **¥{item['price']:,}** (Threshold: ¥{item['threshold']:,})\n"
         if idx < len(items) - 1:
             value += "\n"
 
