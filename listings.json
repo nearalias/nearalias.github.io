@@ -70,5 +70,14 @@
         "url": "https://jp.mercari.com/item/m26357508234",
         "user_ids": ["238521085258235904"],
         "website": "MERCARI"
+    },
+    {
+        "name": "The Legendary Exodia Incarnate",
+        "code": "INFO-AE121",
+        "condition": "Raw",
+        "threshold": 44000,
+        "url": "https://jp.mercari.com/shops/product/vh8ibMVj4CZmJgPJCDhwHP",
+        "user_ids": ["238521085258235904"],
+        "website": "MERCARI"
     }
 ]
