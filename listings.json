@@ -63,15 +63,6 @@
         "website": "MERCARI"
     },
     {
-        "name": "Dragon Master Lord",
-        "code": "ALIN-AE000",
-        "condition": "Raw",
-        "threshold": 40000,
-        "url": "https://jp.mercari.com/item/m46562052418",
-        "user_ids": ["238521085258235904"],
-        "website": "MERCARI"
-    },
-    {
         "name": "Lightning Vortex",
         "code": "FET-AE040",
         "condition": "Raw",
