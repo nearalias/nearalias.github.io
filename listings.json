@@ -18,24 +18,6 @@
         "website": "MERCARI"
     },
     {
-        "name": "Dark Paladin AE",
-        "code": "MFC-105",
-        "condition": "ARS 10",
-        "threshold": 57000,
-        "url": "https://jp.mercari.com/item/m55582292120",
-        "user_ids": ["238521085258235904"],
-        "website": "MERCARI"
-    },
-    {
-        "name": "Yata-Garasu AE",
-        "code": "LOD-000",
-        "condition": "ARS 10",
-        "threshold": 72222,
-        "url": "https://jp.mercari.com/item/m89064529226",
-        "user_ids": ["238521085258235904"],
-        "website": "MERCARI"
-    },
-    {
         "name": "Black Luster Soldier - Envoy of the Beginning",
         "code": "IOC-AE025",
         "condition": "ARS 10",
@@ -68,6 +50,15 @@
         "condition": "Raw",
         "threshold": 44444,
         "url": "https://jp.mercari.com/item/m22915771845",
+        "user_ids": ["238521085258235904"],
+        "website": "MERCARI"
+    },
+    {
+        "name": "Ruin, Queen of Oblivion",
+        "code": "SOI-AE034",
+        "condition": "PSA 10",
+        "threshold": 288888,
+        "url": "https://jp.mercari.com/item/m42702468776",
         "user_ids": ["238521085258235904"],
         "website": "MERCARI"
     }
