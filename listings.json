@@ -1,14 +1,5 @@
 [
     {
-        "name": "Dark Magician of Chaos",
-        "code": "IOC-AE065",
-        "condition": "ARS 10+",
-        "threshold": 222222,
-        "url": "https://jp.mercari.com/item/m20120586668",
-        "user_ids": ["238521085258235904"],
-        "website": "MERCARI"
-    },
-    {
         "name": "The Legendary Exodia Incarnate",
         "code": "INFO-AE121",
         "condition": "Raw",
