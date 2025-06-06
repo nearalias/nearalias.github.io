@@ -52,5 +52,14 @@
         "url": "https://jp.mercari.com/item/m42702468776",
         "user_ids": ["238521085258235904"],
         "website": "MERCARI"
+    },
+    {
+        "name": "Gandora the Dragon of Destruction",
+        "code": "LEDE-AES01",
+        "condition": "ARS 10+",
+        "threshold": 222222,
+        "url": "https://jp.mercari.com/item/m23525294712",
+        "user_ids": ["238521085258235904"],
+        "website": "MERCARI"
     }
 ]
