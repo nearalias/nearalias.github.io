@@ -61,5 +61,14 @@
         "url": "https://jp.mercari.com/item/m23525294712",
         "user_ids": ["238521085258235904"],
         "website": "MERCARI"
+    },
+    {
+        "name": "Dark Magician Girl",
+        "code": "2017-JPP01",
+        "condition": "ARS 10",
+        "threshold": 577777,
+        "url": "https://jp.mercari.com/item/m55059824485",
+        "user_ids": ["238521085258235904"],
+        "website": "MERCARI"
     }
 ]
